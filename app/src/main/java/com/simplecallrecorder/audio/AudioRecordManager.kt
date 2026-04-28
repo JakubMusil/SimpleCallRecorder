@@ -25,7 +25,7 @@ class AudioRecordManager {
         private const val SAMPLE_RATE = 44100
         private const val CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_MONO
         private const val AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT
-        private const val RECORDINGS_DIR = "Documents/MojeNahravky"
+        private const val RECORDINGS_SUBDIR = "MojeNahravky"
     }
 
     fun startRecording(callType: String, phoneNumber: String): File? {
@@ -128,7 +128,7 @@ class AudioRecordManager {
     private fun createOutputFile(callType: String, phoneNumber: String): File? {
         val dir = File(
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
-            "MojeNahravky"
+            RECORDINGS_SUBDIR
         )
         if (!dir.exists() && !dir.mkdirs()) {
             Log.e(TAG, "Failed to create recordings directory")

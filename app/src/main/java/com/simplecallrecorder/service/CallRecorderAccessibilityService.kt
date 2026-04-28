@@ -30,7 +30,6 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import java.util.concurrent.Executor
 
 class CallRecorderAccessibilityService : AccessibilityService() {
 
@@ -108,7 +107,7 @@ class CallRecorderAccessibilityService : AccessibilityService() {
             telephonyCallback = callback
             try {
                 telephonyManager.registerTelephonyCallback(
-                    mainExecutor as Executor,
+                    mainExecutor,
                     callback
                 )
             } catch (e: SecurityException) {
