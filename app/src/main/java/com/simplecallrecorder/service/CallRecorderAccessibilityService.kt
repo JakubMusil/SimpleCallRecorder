@@ -2,7 +2,6 @@ package com.simplecallrecorder.service
 
 import android.accessibilityservice.AccessibilityService
 import android.accessibilityservice.AccessibilityServiceInfo
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -25,6 +24,7 @@ import com.simplecallrecorder.worker.UploadWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import java.io.File
 import java.text.SimpleDateFormat
@@ -92,7 +92,7 @@ class CallRecorderAccessibilityService : AccessibilityService() {
         if (audioManager.isRecording()) {
             stopRecording()
         }
-        serviceScope.coroutineContext[SupervisorJob]?.cancel()
+        serviceScope.cancel()
     }
 
     @Suppress("DEPRECATION")

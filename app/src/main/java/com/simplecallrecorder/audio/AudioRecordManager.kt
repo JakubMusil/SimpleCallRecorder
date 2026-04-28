@@ -26,6 +26,8 @@ class AudioRecordManager {
         private const val CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_MONO
         private const val AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT
         private const val RECORDINGS_SUBDIR = "MojeNahravky"
+        private const val MAX_PHONE_NUMBER_LENGTH = 20
+        private const val MAX_CALL_TYPE_LENGTH = 10
     }
 
     fun startRecording(callType: String, phoneNumber: String): File? {
@@ -142,11 +144,11 @@ class AudioRecordManager {
         val time = timeFormat.format(now)
 
         val safeNumber = phoneNumber.replace(Regex("[^0-9+]"), "")
-            .take(20)
+            .take(MAX_PHONE_NUMBER_LENGTH)
             .ifEmpty { "unknown" }
         val safeType = callType.lowercase(Locale.getDefault())
             .replace(Regex("[^a-z]"), "")
-            .take(10)
+            .take(MAX_CALL_TYPE_LENGTH)
             .ifEmpty { "unknown" }
 
         val fileName = "${safeType}-${safeNumber}-${date}-${time}.mp3"
